@@ -1,9 +1,9 @@
 package com.udacity.gradle.builditbigger.backend;
 
+import com.udacity.javajokerlib.Joker;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
-import com.udacity.jokeproviderjavalib.JokeProvider;
 
 import javax.inject.Named;
 
@@ -32,12 +32,13 @@ public class MyEndpoint {
         return response;
     }
 
-    @ApiMethod(name = "getRandomJoke")
-    public MyBean getRandomJoke() {
-        MyBean response = new MyBean();
-        response.setData(JokeProvider.getJoke());
-
-        return response;
+    /**
+     * An endpoint method that provides jokes
+     */
+    @ApiMethod(name = "tellJoke")
+    public Joke tellJoke() {
+        Joke joke = new Joke();
+        joke.setText(new Joker().tellAJoke());
+        return joke;
     }
-
 }
